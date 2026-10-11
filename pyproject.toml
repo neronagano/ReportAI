@@ -1,0 +1,79 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shiftledger"
+version = "0.1.0"
+description = "Configurable shift reports and reliable asynchronous reconciliation"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "anyio>=4.8,<5",
+    "aiokafka>=0.12,<1",
+    "alembic>=1.16,<2",
+    "asyncpg>=0.30,<1",
+    "boto3>=1.40,<2",
+    "email-validator>=2.3,<3",
+    "fastapi>=0.120,<1",
+    "pillow>=11.3,<14",
+    "prometheus-client>=0.22,<1",
+    "pydantic-settings>=2.10,<3",
+    "pwdlib[argon2]>=0.2,<1",
+    "pyjwt>=2.10,<3",
+    "python-multipart>=0.0.20,<1",
+    "redis>=6.4,<9",
+    "sqlalchemy[asyncio]>=2.0.44,<2.1",
+    "structlog>=25.4,<27",
+    "uvicorn[standard]>=0.35,<1",
+]
+
+[dependency-groups]
+dev = [
+    "boto3-stubs[s3]>=1.40,<2",
+    "httpx>=0.28,<1",
+    "mypy>=1.17,<2",
+    "pip-audit>=2.9,<3",
+    "pytest>=8.4,<10",
+    "pytest-asyncio>=1.1,<2",
+    "pytest-cov>=6,<8",
+    "ruff>=0.12,<1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/shiftledger"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "ASYNC", "RUF"]
+allowed-confusables = ["К", "а", "с"]
+
+[tool.ruff.lint.per-file-ignores]
+"alembic/versions/*.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["aiokafka", "aiokafka.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-ra --strict-markers"
+markers = ["integration: requires a migrated disposable PostgreSQL database and Redis"]
+
+[tool.coverage.run]
+source = ["shiftledger"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
