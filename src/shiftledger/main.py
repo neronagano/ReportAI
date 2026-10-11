@@ -17,13 +17,13 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from shiftledger.api.dependencies import ResourcesDep
 from shiftledger.api.middleware import RequestContextMiddleware
 from shiftledger.attachments.router import router as attachments_router
-from shiftledger.bootstrap import Resources
 from shiftledger.config import Environment, Settings, get_settings
 from shiftledger.errors import ApplicationError
 from shiftledger.identity.router import router as identity_router
 from shiftledger.observability import configure_logging
 from shiftledger.reconciliation.router import router as reconciliation_router
 from shiftledger.reports.router import router as reports_router
+from shiftledger.resources import Resources
 from shiftledger.templates.router import router as templates_router
 
 log = structlog.get_logger()

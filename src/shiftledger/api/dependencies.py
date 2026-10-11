@@ -7,11 +7,11 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from shiftledger.bootstrap import Resources
 from shiftledger.errors import ApplicationError
 from shiftledger.identity.access import MemberContext
 from shiftledger.identity.models import Membership, Role, User
 from shiftledger.identity.security import decode_token
+from shiftledger.resources import Resources
 
 bearer = HTTPBearer(auto_error=False)
 

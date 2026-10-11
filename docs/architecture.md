@@ -23,7 +23,7 @@ src/shiftledger/
 ├── intelligence/      # Контракты распознавания и объяснения результатов
 ├── messaging/         # Конверт события, Kafka, Outbox и Inbox
 ├── workers/           # Процессы, обработка ошибок, остановка, heartbeat
-├── bootstrap.py       # Сборка и закрытие инфраструктурных ресурсов
+├── resources.py       # Создание и закрытие инфраструктурных ресурсов
 ├── database.py        # DeclarativeBase и фабрика сессий
 ├── config.py          # Типизированная конфигурация окружения
 ├── observability.py   # Логи и метрики
