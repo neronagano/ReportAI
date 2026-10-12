@@ -43,6 +43,9 @@ dev = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/shiftledger"]
 
+[tool.uv]
+required-version = "==0.10.9"
+
 [tool.ruff]
 target-version = "py312"
 line-length = 100
